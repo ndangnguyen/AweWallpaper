@@ -3,8 +3,6 @@ package com.ndn.awewallpaper.data.source.remote.api.middleware
 import androidx.annotation.NonNull
 import com.ndn.awewallpaper.BuildConfig
 import com.ndn.awewallpaper.data.source.repositories.TokenRepository
-import com.ndn.awewallpaper.utils.LogUtils
-import com.ndn.awewallpaper.utils.extension.insert
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
@@ -17,6 +15,7 @@ class InterceptorImpl(private var tokenRepository: TokenRepository?) : Intercept
         private const val TAG = "InterceptorImpl"
         private const val TOKEN_TYPE = "Bearer "
         private const val KEY_TOKEN = "Authorization"
+        private const val PARAMETER_AUTH = "auth"
     }
 
     private var mIsRefreshToken: Boolean = false
@@ -51,13 +50,9 @@ class InterceptorImpl(private var tokenRepository: TokenRepository?) : Intercept
 
     private fun initializeHeader(chain: Interceptor.Chain): Request.Builder {
         val originRequest = chain.request()
-
-        val urlWithPrefix = BuildConfig.BASE_URL
-        val newUrl = chain.request().url().toString().insert(
-            index = urlWithPrefix.length,
-            contentInsert = ""
-        )
-        LogUtils.e("newUrl", newUrl)
+        val newUrl = chain.request().url().newBuilder()
+            .addQueryParameter(PARAMETER_AUTH, BuildConfig.API_KEY)
+            .build()
         val builder = originRequest.newBuilder()
             .url(newUrl)
             .header("Accept", "application/json")
@@ -72,25 +67,4 @@ class InterceptorImpl(private var tokenRepository: TokenRepository?) : Intercept
 
         return builder
     }
-
-    //TODO refreshToken
-    /* private fun refreshToken() {
-       if (tokenRepository == null) {
-         return
-       }
-       mIsRefreshToken = true
-       tokenRepository!!.refreshToken().subscribe(object : DisposableSingleObserver<LoginResponse>() {
-         override fun onSuccess(loginResponse: LoginResponse?) {
-           if (loginResponse != null && loginResponse!!.getToken() != null) {
-             tokenRepository!!.saveToken(loginResponse!!.getToken())
-           }
-           mIsRefreshToken = false
-         }
-
-         override fun onError(e: Throwable) {
-           LogUtils.e(TAG, "refreshToken", e)
-           mIsRefreshToken = false
-         }
-       })
-     }*/
 }

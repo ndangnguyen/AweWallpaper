@@ -20,6 +20,10 @@
     <string name="msg_error_no_internet">インターネット接続がオフラインのようです。</string>
     <string name="err_acc_has_changed_plz_login_again">アカウントを変更されました。改めてログインが必要になります</string>
     <string name="title_please_click_back_again_to_exit">閉じるため、もう一度戻るをクリックしてください</string>
+    <string name="title_home_page">Trang chủ</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

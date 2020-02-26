@@ -1,4 +1,4 @@
-package com.ndn.awewallpaper.features.home
+package com.ndn.awewallpaper.features
 
 import com.ndn.awewallpaper.base.BaseViewModel
 

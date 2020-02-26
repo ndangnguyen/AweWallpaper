@@ -9,13 +9,15 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import com.ndn.awewallpaper.utils.widget.dialogManager.DialogAlert
 import com.ndn.awewallpaper.utils.widget.dialogManager.DialogConfirm
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.reflect.KClass
 
-abstract class BaseFragment<VM : BaseViewModel> : Fragment(), BaseView {
+abstract class BaseFragment<VM : BaseViewModel>(private val clazz: KClass<VM>)  : Fragment(), BaseView {
 
     protected abstract val layoutID: Int
     val compositeDisposable = CompositeDisposable()
 
-    protected abstract val viewModelx: VM
+    protected val viewModelx: VM by viewModel(clazz)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?): View? {

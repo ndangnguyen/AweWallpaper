@@ -62,6 +62,7 @@ fun WebView.loadWebViewUrl(url: String?, progressBar: ProgressBar?) {
 
 fun ImageView.loadImageUrl(url: String?) {
     GlideApp.with(this.context).load(url)
+        .centerCrop()
         .transition(DrawableTransitionOptions.withCrossFade())
         .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
         .dontTransform()

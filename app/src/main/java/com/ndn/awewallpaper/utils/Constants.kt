@@ -23,5 +23,13 @@ object Constants {
 
     const val MINIMUM_MINUTE_DURATION = 20
 
+    const val DEFAULT_INT = -1
+    const val DEFAULT_STRING = ""
+    const val DEFAULT_BOOLEAN = false
+
+    /**
+     * EXTRAS
+     */
+    const val EXTRAS_IMAGE = "EXTRAS_IMAGE"
 
 }

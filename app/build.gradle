@@ -51,9 +51,13 @@ android {
     buildTypes {
         debug {
             ext.enableCrashlytics = false
+            buildConfigField "String", "BASE_URL", "\"https://wall.alphacoders.com/api2.0/\""
+            buildConfigField "String", "API_KEY", "\"b175682a66481e7b7a811bcb26272ac4\""
         }
 
         release {
+            buildConfigField "String", "BASE_URL", "\"https://wall.alphacoders.com/api2.0/\""
+            buildConfigField "String", "API_KEY", "\"b175682a66481e7b7a811bcb26272ac4\""
             minifyEnabled true
             shrinkResources true
 
@@ -153,6 +157,7 @@ dependencies {
 
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.8.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt 'com.github.bumptech.glide:compiler:4.8.0'
 
     //Leak Canary
